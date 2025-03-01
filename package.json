@@ -1,6 +1,6 @@
 {
   "name": "npm-scanner-demo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Demo project for npm-package-scanner - shows package evolution over time",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "test": "echo \"Tests passed\""
   },
   "dependencies": {
-    "esbuild": "0.24.2",
+    "esbuild": "0.25.0",
+    "rollup": "4.12.0",
     "lodash": "4.17.21",
     "source-map": "0.7.4"
   },
