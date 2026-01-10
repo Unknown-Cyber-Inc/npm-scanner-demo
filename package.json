@@ -1,6 +1,6 @@
 {
   "name": "npm-scanner-demo",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Demo project for npm-package-scanner - shows package evolution over time",
   "main": "index.js",
   "scripts": {
