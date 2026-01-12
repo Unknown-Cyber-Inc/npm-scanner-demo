@@ -56,4 +56,5 @@ jobs:
           yara-include: '*.js,*.exe'
           generate-summary: 'true'
           fail-on-threats: 'true'
+          license-check: 'true'
           api-key: ${{ secrets.UC_API_KEY }}
