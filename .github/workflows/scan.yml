@@ -46,7 +46,7 @@ jobs:
           file node_modules/lodash_infected/* || true
       
       - name: Scan npm packages
-        uses: Unknown-Cyber-Inc/npm-package-scanner@main
+        uses: Unknown-Cyber-Inc/npm-package-scanner@feature/multi-ecosystem-scanner
         id: scan
         with:
           upload: 'true'
