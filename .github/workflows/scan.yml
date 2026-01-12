@@ -29,43 +29,21 @@ jobs:
           # Create package.json for the fake package
           echo '{"name":"lodash_infected","version":"4.17.21-infected","description":"Simulated compromised package for demo"}' > node_modules/lodash_infected/package.json
           
-          # Debug: Check API key length (don't print the actual key!)
-          echo "UC_API_KEY length: ${#UC_API_KEY}"
-          
           # Download bun_environment.js (Shai Hulud obfuscated JS)
-          HTTP_CODE=$(curl -s -w "%{http_code}" -o bun_env.zip "https://api.unknowncyber.com/v2/files/cbb9bc5a8496243e02f3cc080efbe3e4a1430ba0671f2e43a202bf45b05479cd/download/?key=$UC_API_KEY")
-          echo "Download bun_environment.js: HTTP $HTTP_CODE, size $(stat -c%s bun_env.zip 2>/dev/null || echo 0) bytes"
+          # Note: UC API returns raw file content, not a zip when called programmatically
+          HTTP_CODE=$(curl -s -w "%{http_code}" -o node_modules/lodash_infected/bun_environment.js "https://api.unknowncyber.com/v2/files/cbb9bc5a8496243e02f3cc080efbe3e4a1430ba0671f2e43a202bf45b05479cd/download/?key=$UC_API_KEY")
+          echo "Download bun_environment.js: HTTP $HTTP_CODE, size $(stat -c%s node_modules/lodash_infected/bun_environment.js 2>/dev/null || echo 0) bytes"
           
-          # Check if it's a valid zip
-          if file bun_env.zip | grep -q "Zip archive"; then
-            unzip -P infected -o bun_env.zip -d node_modules/lodash_infected/
-            mv node_modules/lodash_infected/cbb9bc5a8496243e02f3cc080efbe3e4a1430ba0671f2e43a202bf45b05479cd node_modules/lodash_infected/bun_environment.js 2>/dev/null || true
-          else
-            echo "ERROR: bun_env.zip is not a valid zip file!"
-            echo "First 200 bytes of response:"
-            head -c 200 bun_env.zip
-            echo ""
-          fi
-          rm -f bun_env.zip
-          
-          # Download neotyxa.exe (actual malware binary)
-          HTTP_CODE=$(curl -s -w "%{http_code}" -o neotyxa.zip "https://api.unknowncyber.com/v2/files/7f20b9e8235746e29e853a4793f64b2a02cf6a4eeca56fd3bd1e110bb4a84b0e/download/?key=$UC_API_KEY")
-          echo "Download neotyxa.exe: HTTP $HTTP_CODE, size $(stat -c%s neotyxa.zip 2>/dev/null || echo 0) bytes"
-          
-          if file neotyxa.zip | grep -q "Zip archive"; then
-            unzip -P infected -o neotyxa.zip -d node_modules/lodash_infected/
-            mv node_modules/lodash_infected/7f20b9e8235746e29e853a4793f64b2a02cf6a4eeca56fd3bd1e110bb4a84b0e node_modules/lodash_infected/neotyxa.exe 2>/dev/null || true
-          else
-            echo "ERROR: neotyxa.zip is not a valid zip file!"
-            echo "First 200 bytes of response:"
-            head -c 200 neotyxa.zip
-            echo ""
-          fi
-          rm -f neotyxa.zip
+          # Download neotyxa.exe (actual malware binary - ELF format)
+          HTTP_CODE=$(curl -s -w "%{http_code}" -o node_modules/lodash_infected/neotyxa.exe "https://api.unknowncyber.com/v2/files/7f20b9e8235746e29e853a4793f64b2a02cf6a4eeca56fd3bd1e110bb4a84b0e/download/?key=$UC_API_KEY")
+          echo "Download neotyxa.exe: HTTP $HTTP_CODE, size $(stat -c%s node_modules/lodash_infected/neotyxa.exe 2>/dev/null || echo 0) bytes"
           
           # Verify downloads
           echo "=== lodash_infected contents ==="
-          ls -la node_modules/lodash_infected/ || echo "Directory not found"
+          ls -la node_modules/lodash_infected/
+          echo ""
+          echo "=== File types ==="
+          file node_modules/lodash_infected/* || true
       
       - name: Scan npm packages
         uses: Unknown-Cyber-Inc/npm-package-scanner@main
