@@ -1,4 +1,4 @@
-# NPM Scanner Demo
+# UC Software Scan Demo
 
 This project demonstrates the uc-software-scan GitHub Action.
 
