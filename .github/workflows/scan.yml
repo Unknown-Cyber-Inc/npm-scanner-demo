@@ -19,7 +19,7 @@ jobs:
       - run: npm install
       
       - name: Scan packages
-        uses: Unknown-Cyber-Inc/npm-package-scanner@main
+        uses: Unknown-Cyber-Inc/uc-software-scan@main
         id: scan
         with:
           upload: 'true'

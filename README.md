@@ -1,6 +1,6 @@
 # NPM Scanner Demo
 
-This project demonstrates the npm-package-scanner GitHub Action.
+This project demonstrates the uc-software-scan GitHub Action.
 
 ## Current Release: v1.4.0
 
@@ -24,5 +24,5 @@ This project demonstrates the npm-package-scanner GitHub Action.
 This repository simulates a real-world project with evolving npm dependencies.
 Each release represents a point in time with different package versions.
 
-The [npm-package-scanner](https://github.com/Unknown-Cyber-Inc/npm-package-scanner) 
+The [uc-software-scan](https://github.com/Unknown-Cyber-Inc/uc-software-scan) 
 action scans for binaries and uploads them to UnknownCyber for security analysis.

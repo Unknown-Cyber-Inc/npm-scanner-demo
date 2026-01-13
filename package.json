@@ -1,7 +1,7 @@
 {
   "name": "npm-scanner-demo",
   "version": "3.0.0",
-  "description": "Demo project for npm-package-scanner - shows package evolution over time",
+  "description": "Demo project for uc-software-scan - shows package evolution over time",
   "main": "index.js",
   "scripts": {
     "build": "esbuild src/index.js --bundle --outfile=dist/bundle.js",
