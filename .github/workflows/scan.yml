@@ -11,23 +11,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      
+          node-version: "20"
+
       - run: npm install
-      
+
       - name: Scan packages
         uses: Unknown-Cyber-Inc/uc-software-scan@main
         id: scan
         with:
-          upload: 'true'
-          deep-scan: 'true'
-          include-all-files: 'true'
-          yara-scan: 'true'
-          yara-include: '*.js,*.exe,*.elf'
-          generate-summary: 'true'
-          fail-on-threats: 'true'
-          license-check: 'true'
+          upload: "true"
+          deep-scan: "true"
+          include-all-files: "true"
+          include-package-json: "true"
+          include-lock-files: "true"
+          yara-scan: "true"
+          yara-include: "*.js,*.exe,*.elf"
+          generate-summary: "true"
+          fail-on-threats: "true"
+          license-check: "true"
           api-key: ${{ secrets.UC_API_KEY }}
